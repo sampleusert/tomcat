@@ -14,7 +14,7 @@ public class SampleService {
      @GET
      @Path("{param}")
      public Response getMsg(@PathParam("param") String msg) {
-          String output = "Jersey say2 : " + msg;
+          String output = "Jersey say3 : " + msg;
           logger.info("logtest" + output);
           return Response.status(200).entity(output).build();
      }
