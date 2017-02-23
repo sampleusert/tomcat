@@ -13,7 +13,8 @@ public class Constants {
 	 */
 	public Properties getConstants() throws IOException {
 		
-    	InputStream is = Constants.class.getClassLoader().getResourceAsStream("conf.properties");
+    	//InputStream is = Constants.class.getClassLoader().getResourceAsStream("conf.properties");
+    	InputStream is = this.getClass().getResource("conf.properties").openStream();
     	Properties properties = new Properties();
     	properties.load(is);
     	is.close();
