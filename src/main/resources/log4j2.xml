@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="OFF">
+
+	<properties>
+		<property name="appName">addressSearch</property>
+		<property name="baseDir">/var/log/dcm</property>
+		<property name="rollingDir">${baseDir}/archive/${appName}</property>
+	</properties>
+	
+    <Appenders>
+        <Console name="forDevelop" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{DEFAULT} | [%t] | %-5level | %c{36} | %msg%n"/>
+        </Console>
+        <RollingFile name="forService" fileName="${baseDir}/${appName}.log" filePattern="${rollingDir}/$${date:yyyy-MM}/${appName}_%d{yyyyMMdd}.%i.log.zip">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+        	<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | [%t] | %-5level | %c{36} | %msg%n"/>
+        </RollingFile>
+        <RollingFile name="forTrace" fileName="${baseDir}/${appName}_trace.log" filePattern="${rollingDir}/$${date:yyyy-MM}/${appName}_trace_%d{yyyyMMdd}.%i.log.zip">
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+        	<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | [%t] | %-5level | %c{36} | %msg%n"/>
+        </RollingFile>        
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="File" />
+            <AppenderRef ref="RollingFile" />
+        </Root>
+        <Logger name="ServiceLog" level="info">
+            <AppenderRef ref="forService"/>
+        </Logger>
+        <Logger name="com.densan.sample.SampleService" level="info">
+            <AppenderRef ref="forTrace"/>
+        </Logger>        
+    </Loggers>
+</configuration>
