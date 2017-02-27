@@ -16,7 +16,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 
 @Path("oauth2")
-@Api(value = "/oauth2", description="Google oauth2認証")
+@Api(value = "/oauth2", description="Google oauth2認証a")
 public class Oauth2Api {
 	final Logger logger = Logger.getLogger(this.getClass().getName());
 
