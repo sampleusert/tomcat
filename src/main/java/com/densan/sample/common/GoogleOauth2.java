@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Arrays;
 
 import com.densan.sample.constant.Constants;
+import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
@@ -15,6 +18,7 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.CalendarScopes;
 
 import java.util.List;
@@ -103,10 +107,10 @@ public class GoogleOauth2 {
      * @throws IOException
      */
     public GoogleCredential getCredetionl(String refreshToken) throws IOException {
-    	InputStream in =
+    	/*InputStream in =
     			GoogleOauth2.class.getResourceAsStream("./client_secret.json");
     	GoogleClientSecrets clientSecrets =
-    			GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+    			GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));*/
     	
     	GoogleCredential credential = 
     			new GoogleCredential.Builder()
@@ -123,8 +127,19 @@ public class GoogleOauth2 {
     	return credential;
     	
     }
-
-
-
+    
+    /**
+     * カレンダー連携
+     * @param credential
+     * @return
+     * @throws IOException
+     */
+    public Calendar getCalendarService(Credential credential) throws IOException{
+		
+	    return new com.google.api.services.calendar.Calendar.Builder(
+	            HTTP_TRANSPORT, JSON_FACTORY, credential)
+	            .setApplicationName(APPLICATION_NAME)
+	            .build();
+    }
 
 }

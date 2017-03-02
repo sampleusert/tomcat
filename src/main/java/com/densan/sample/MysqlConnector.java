@@ -28,10 +28,9 @@ public class MysqlConnector {
     @GET
     @Path("{param}")
     @ApiOperation(value = "param")
-    public Response getMsg(@PathParam("param") String msg){
+    public Response getMsg(@PathParam("param") String msg) throws InstantiationException, IllegalAccessException, ClassNotFoundException, GeneralSecurityException, IOException, SQLException{
          String output = "Jersey say3 : " + msg;
                
- 		try{
  			Mysql m = new Mysql();
  			Connection con = m.connection();
  			System.out.println("success!");
@@ -42,11 +41,7 @@ public class MysqlConnector {
  			System.out.println("num : " + result);
  			
  			m.closeDb(con);
- 		}catch(GeneralSecurityException | IOException e){
- 			System.out.println("jdbc fail");
- 		}catch (SQLException e){
- 			System.out.println("mysql fail");
- 		}        
+    
          
          //logger.info("logtest" + output);
          //log.info("abcde");
