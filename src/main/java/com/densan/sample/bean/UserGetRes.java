@@ -4,10 +4,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @XmlRootElement
-public class UserList {
+public class UserGetRes {
 		public String result;
-		public String hitCount;
-		public List<UserInfo> userList;
 		public String errMessage;
-		public String userId;
+		public String hitCount;
+		public List<UserGetResInfo> userList;
 }

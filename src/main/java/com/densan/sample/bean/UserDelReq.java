@@ -1,6 +1,6 @@
 package com.densan.sample.bean;
 
 
-public class UserInfo {
+public class UserDelReq {
 		public String userId;
 }
