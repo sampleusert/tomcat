@@ -88,9 +88,23 @@
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-json-jackson</artifactId>
       <version>2.25.1</version>
-    </dependency>                    
- </dependencies>
-
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.8.7</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sendgrid</groupId>
+      <artifactId>sendgrid-java</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.3</version>
+    </dependency>
+  </dependencies>
   <build>
     <finalName>tomcat</finalName>
     <plugins>
@@ -99,7 +113,7 @@
             <artifactId>tomcat7-maven-plugin</artifactId>
             <version>2.2</version>
             <configuration>
-                <server>tomcat-localhost</server>
+                <server>localtomcat</server>
                 <port>8080</port>
                 <path>/test</path>
             </configuration>

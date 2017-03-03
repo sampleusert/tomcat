@@ -61,11 +61,19 @@ public class UserApi {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public UserDelRes userDel(UserDelReq udq) {
+				
+		UserDelRes uds = new UserDelRes();
 		
-		// userID
+		// リクエスト情報
 		logger.info(udq.userId);
 		
-		UserDelRes uds = new UserDelRes();
+		// 必須チェック
+		if (udq.userId == null) {
+			uds.result = Result.NG;
+			uds.errMessage = "parameter error";
+			
+			return uds;
+		}
 		
 		try {
 			uds.userId = udq.userId;
@@ -87,7 +95,7 @@ public class UserApi {
 		} catch(Exception e) {
 			e.printStackTrace();
 			uds.result = Result.NG;
-			uds.errMessage = "";
+			uds.errMessage = "system error";
 		}
 		
 		return uds;
