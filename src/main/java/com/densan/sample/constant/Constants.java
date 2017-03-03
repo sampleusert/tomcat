@@ -1,6 +1,7 @@
 package com.densan.sample.constant;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -37,6 +38,17 @@ public class Constants {
 		ResourceBundle myResource = ResourceBundle.getBundle("conf", Locale.getDefault(), urlLoader);
 		return myResource;
 		
-	}	
+	}
+	
+	public Properties getConstants3() throws IOException {
+    	InputStream is = new FileInputStream("/tmp/conf.properties");
+    	//InputStream is = c.getResource("conf.properties").openStream();
+    	Properties properties = new Properties();
+    	properties.load(is);
+    	is.close();
+    	
+    	return properties;
+	}
+
 
 }
