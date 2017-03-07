@@ -34,7 +34,7 @@ public class GoogleOauth2 {
     private HttpTransport HTTP_TRANSPORT;
 
     private final List<String> SCOPES =
-        Arrays.asList(CalendarScopes.CALENDAR_READONLY);
+        Arrays.asList(CalendarScopes.CALENDAR);
         
     private String REDIRECT_URL;
     
@@ -45,7 +45,7 @@ public class GoogleOauth2 {
     	HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
     	JSON_FACTORY = JacksonFactory.getDefaultInstance();
     	
-    	Properties properties = new Constants().getConstants();
+    	Properties properties = new Constants().getConstants3();
     	
     	REDIRECT_URL = properties.getProperty("REDIRECT_URL");
     	CLIENT_ID = properties.getProperty("CLIENT_ID");
