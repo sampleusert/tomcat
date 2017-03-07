@@ -23,7 +23,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 
 @Path("oauth2")
-@Api(value = "/oauth2", description="Google oauth2認証a")
+@Api(value = "/oauth2", description="Google oauth2認証")
 public class Oauth2Api {
 	final Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -31,7 +31,7 @@ public class Oauth2Api {
 	@Path("auth")
 	@ApiOperation(value = "初回認証")
 	public Response auth() throws URISyntaxException, GeneralSecurityException, IOException, InterruptedException {
-	    NewCookie cookie = new NewCookie("userId", "456");
+	    NewCookie cookie = new NewCookie("userId", "333");
 	    
 	    //return Response.ok("OK").cookie(cookie).build();
 	    
@@ -58,10 +58,10 @@ public class Oauth2Api {
 		
 		m.closeDb(con);
 		
-		String output = code + ":" + goauth2.oauth2CallBack(code) + ":" + cookie.getValue();
+		//String output = code + ":" + goauth2.oauth2CallBack(code) + ":" + cookie.getValue();
 		NewCookie userCookie = new NewCookie(cookie,null,-1,false);
 		
-		return Response.status(200).entity(output).cookie(userCookie).build();
+		return Response.status(200).cookie(userCookie).build();
 		
 		
 	}
