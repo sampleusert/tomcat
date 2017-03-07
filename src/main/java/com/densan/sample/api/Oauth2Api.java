@@ -31,7 +31,7 @@ public class Oauth2Api {
 	@Path("auth")
 	@ApiOperation(value = "初回認証")
 	public Response auth() throws URISyntaxException, GeneralSecurityException, IOException, InterruptedException {
-	    NewCookie cookie = new NewCookie("userId", "333");
+	    NewCookie cookie = new NewCookie("userId", "666");
 	    
 	    //return Response.ok("OK").cookie(cookie).build();
 	    
