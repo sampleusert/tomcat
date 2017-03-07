@@ -1,6 +1,9 @@
 package com.densan.sample.api;
 
 import java.util.logging.Logger;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +18,7 @@ import com.densan.sample.bean.UserDelReq;
 import com.densan.sample.bean.UserDelRes;
 import com.densan.sample.bean.UserGetRes;
 import com.densan.sample.bean.UserGetResInfo;
+import com.densan.sample.common.Mysql;
 import com.densan.sample.constant.Result;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -34,14 +38,18 @@ public class UserApi {
 		UserGetRes ugs = new UserGetRes();
 		List<UserGetResInfo> userList = new ArrayList<UserGetResInfo>();
 		
-		try {
-			// 未実装 ユーザ情報をDBから取得
-			UserGetResInfo ui = new UserGetResInfo();
-			ui.userId = "test";
-			
-			userList.add(ui);
-			userList.add(ui);
-			/////////
+		try {	
+			Mysql m = new Mysql();
+			Connection con = m.connection();
+			java.sql.PreparedStatement ps = con.prepareStatement("SELECT userId FROM Auth");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				UserGetResInfo ui = new UserGetResInfo();
+				ui.userId = rs.getString(1);
+				userList.add(ui);
+			}
+			rs.close();
+			m.closeDb(con);	
 			
 			ugs.result = Result.OK;
 			ugs.hitCount = Integer.toString(userList.size());
@@ -77,9 +85,15 @@ public class UserApi {
 		
 		try {
 			uds.userId = udq.userId;
-			// 未実装 ユーザ情報をDBから削除
-			int result = 1;
-			/////////
+			
+			// ユーザ情報をDBから削除
+			Mysql m = new Mysql();
+			Connection con = m.connection();
+			java.sql.PreparedStatement ps = con.prepareStatement("DELETE FROM Auth WHERE userId = ?");
+			ps.setString(1, udq.userId);
+			int result = ps.executeUpdate();
+			ps.close();
+			m.closeDb(con);	
 			
 			// 成功
 			if (result == 1) {
